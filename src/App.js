@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import server from './server';
+import Image from 'react-graceful-image'
 const hide = {
   display: 'none'
 }
@@ -19,7 +20,9 @@ class App extends Component {
     server
       .get()
       .then((res) => {
-        const vis = new Array(res.data.length - 3).fill().map((e,i)=>0);
+        const vis = new Array(res.data.length - 3)
+          .fill()
+          .map((e, i) => 0);
         this.setState({
           champions: res.data,
           vis: [
@@ -30,24 +33,33 @@ class App extends Component {
 
   }
   next() {
-    const vis = this.state.vis;
-    let find = false,
-      index = 0;
-      console.log(vis)
-    const tvis = vis.map((c, i) => {
-      if (c&&!find) {
-        find = true;
-        index = i+2;
-        c=0;
+    let vis = this.state.vis;
+    console.log(vis)
+    let find = 0,
+      index = -1;
+    for (let i = 0; i < vis.length; i++) {
+      if (vis[i]) {
+        find = 1;
+      } else if (find) {
+        index = i;
+        find = 0;
       }
-      if (find&& i<=index)c=0;
-      else if(find&& i>index && i<index+4)c=1;
-
-      console.log(find,index,c)
-      return c;
-    })
-    console.log(tvis)
-    this.setState({vis:tvis})
+      vis[i] = 0;
+    }
+    console.log(index, vis.length)
+    if (index > -1 && (index + 3 < vis.length || index < vis.length)) {
+      const last = index + 3 < vis.length
+        ? index + 3
+        : vis.length;
+      for (let i = index; i < last; i++) 
+        vis[i] = 1;
+      }
+    else {
+      for (let i = 0; i < 3; i++) 
+        vis[i] = 1;
+      }
+    console.log(vis)
+    this.setState({vis: vis})
   }
   render() {
 
@@ -67,7 +79,7 @@ class App extends Component {
             style={this.state.vis[i]
             ? show
             : hide}>
-            <img src={c.img} alt={c.name}/> {c.name}
+            <Image src={c.img}alt={c.name} width="120" height="120"/>
           </div>
         ))}
       </div>
