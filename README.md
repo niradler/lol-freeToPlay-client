@@ -12,4 +12,4 @@ and the widget will mount where
 <div id="free_to_play"></div>
 ``` 
 
-(demo)[https://niradler.github.io/lol-freeToPlay-client/]
+[demo](https://niradler.github.io/lol-freeToPlay-client/)
