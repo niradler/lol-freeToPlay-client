@@ -68,7 +68,7 @@ class App extends Component {
       : [];
     return (
       <div
-        className="container"
+        style={{display:'flex'}}
         onClick={this
         .next
         .bind(this, null)}>
