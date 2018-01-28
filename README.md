@@ -18,5 +18,6 @@ and the widget will mount where
 ```html
 <div id="free_to_play"></div>
 ``` 
-
-[demo](https://niradler.github.io/lol-freeToPlay-client/)
+## Links
+[client demo](https://niradler.github.io/lol-freeToPlay-client/)
+[server repo](https://github.com/niradler/lol-freeToPlay-server)
